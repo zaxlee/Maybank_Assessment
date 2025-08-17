@@ -53,8 +53,6 @@ public class TransactionService {
         return TransactionMapper.toDto(saved);
     }
 
-    // --- small, self-explanatory exceptions (mapped to HTTP later in the controller) ---
-
     public static class NotFoundException extends RuntimeException {
         public NotFoundException(Long id) { super("Transaction not found: " + id); }
     }
