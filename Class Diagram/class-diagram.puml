@@ -1,0 +1,50 @@
+@startuml
+title Maybank Assessment - Core Classes
+
+package "Domain" {
+  class Transaction {
+    Long id
+    String accountNumber
+    BigDecimal trxAmount
+    String description
+    LocalDate trxDate
+    LocalTime trxTime
+    String customerId
+    Long version
+  }
+}
+
+package "Repository" {
+  interface TransactionRepository
+}
+
+package "Service" {
+  class TransactionService {
+    +search(filters, pageable): Page<TransactionDto>
+    +getById(id): TransactionDto
+    +updateDescription(id, newDesc, ifMatchVersion): TransactionDto
+  }
+}
+
+package "Web" {
+  class TransactionController {
+    +GET /api/transactions
+    +GET /api/transactions/{id}
+    +PUT /api/transactions/{id}/description
+  }
+  class TransactionDto
+}
+
+package "Batch" {
+  class TransactionBatchConfig
+  class RunImportJob
+}
+
+TransactionRepository --> Transaction : JPA manages
+TransactionService --> TransactionRepository : uses
+TransactionController --> TransactionService : calls
+TransactionDto --> Transaction : maps (to/from)
+
+RunImportJob --> TransactionBatchConfig : launches job at startup
+
+@enduml
