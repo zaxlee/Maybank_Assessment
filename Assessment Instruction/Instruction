@@ -1,0 +1,15 @@
+1.    Prepare a batch job to consume the attached text file.
+2.    Prepare RESTFUL API to (1)Retrieve & (2) Update (description) the records
+       a.    Must have pagination
+       b.    Can search by customer ID or account number(s) or description
+       c.    For Update API, must able to handle concurrent update.
+3.    Prepare Unit Test
+
+Notes :-
+
+1.     Free to design the database structure.
+2.    Allowed to use many classes. (OOP is preferable)
+3.    Must follow RESTFUL API standard.
+4.    Code need to be shared in GitHub.
+5.    Pls brief if you are using any Design pattern and why you choose it.
+6.    Documentation is a plus. (Class diagram and activity diagram)
