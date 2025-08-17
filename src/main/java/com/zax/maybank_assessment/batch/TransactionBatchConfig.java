@@ -2,6 +2,8 @@ package com.zax.maybank_assessment.batch;
 
 import com.zax.maybank_assessment.domain.Transaction;
 import com.zax.maybank_assessment.repo.TransactionRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -9,7 +11,6 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.*;
-import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Configuration
 @EnableBatchProcessing
@@ -63,15 +66,23 @@ public class TransactionBatchConfig {
 
     @Bean
     ItemWriter<Transaction> txnWriter(TransactionRepository repo) {
+        Logger log = LoggerFactory.getLogger("BatchDuplicates");
+
         return items -> {
-            // de-dup by natural key within the chunk
-            var unique = new java.util.LinkedHashMap<String, Transaction>();
-            for (var t : items.getItems()) {
+            Map<String, Transaction> unique = new LinkedHashMap<>();
+
+            for (Transaction t : items) {
                 String key = t.getAccountNumber() + "|" + t.getTrxAmount() + "|" +
-                        t.getTrxDate() + "|" + t.getTrxTime() + "|" +
-                        t.getCustomerId() + "|" + t.getDescription();
-                unique.putIfAbsent(key, t);
+                        t.getDescription()   + "|" + t.getTrxDate()   + "|" +
+                        t.getTrxTime()       + "|" + t.getCustomerId();
+
+                if (unique.containsKey(key)) {
+                    log.warn("[Duplicate] Skipping duplicate in chunk: {}", key);
+                } else {
+                    unique.put(key, t);
+                }
             }
+
             repo.saveAll(unique.values());
         };
     }
@@ -81,8 +92,7 @@ public class TransactionBatchConfig {
                            org.springframework.transaction.PlatformTransactionManager txManager,
                            ItemReader<String[]> reader,
                            ItemProcessor<String[], Transaction> processor,
-                           ItemWriter<Transaction> writer,
-                           StepMetricsListener stepMetricsListener) {
+                           ItemWriter<Transaction> writer) {
         return new StepBuilder("importStep", jobRepository)
                 .<String[], Transaction>chunk(200, txManager)
                 .reader(reader)
@@ -94,7 +104,6 @@ public class TransactionBatchConfig {
                 .skip(org.hibernate.exception.ConstraintViolationException.class)
                 .noRollback(org.springframework.dao.DataIntegrityViolationException.class)
                 .noRollback(org.hibernate.exception.ConstraintViolationException.class)
-                .listener(stepMetricsListener)
                 .build();
     }
 
