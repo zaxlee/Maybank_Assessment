@@ -1,0 +1,317 @@
+{
+	"info": {
+		"_postman_id": "12c6ccc2-db0e-46ca-9247-c72a8da3bde3",
+		"name": "Maybank Assessment API",
+		"description": "Collection for testing Maybank Assessment REST APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47649886",
+		"_collection_link": "https://zaxlee-fd75a3a9-1990857.postman.co/workspace/Maybank_Assessment~33ff6423-f0af-42f3-95f3-6bf003f7ae35/collection/47649886-12c6ccc2-db0e-46ca-9247-c72a8da3bde3?action=share&source=collection_link&creator=47649886"
+	},
+	"item": [
+		{
+			"name": "Get Transactions (paged, search)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/transactions?page=0&size=5&customerId=222",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						},
+						{
+							"key": "customerId",
+							"value": "222"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Transactions (paged, search)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/transactions?page=0&size=5&customerId=222",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "customerId",
+									"value": "222"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 17 Aug 2025 01:56:23 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"accountNumber\": \"8872838283\",\n            \"trxAmount\": 123,\n            \"description\": \"FUND TRANSFER\",\n            \"trxDate\": \"2019-09-12\",\n            \"trxTime\": \"11:11:11\",\n            \"customerId\": \"222\",\n            \"version\": 0\n        },\n        {\n            \"id\": 2,\n            \"accountNumber\": \"8872838283\",\n            \"trxAmount\": 1123,\n            \"description\": \"ATM WITHDRWAL\",\n            \"trxDate\": \"2019-09-11\",\n            \"trxTime\": \"11:11:11\",\n            \"customerId\": \"222\",\n            \"version\": 0\n        },\n        {\n            \"id\": 3,\n            \"accountNumber\": \"8872838283\",\n            \"trxAmount\": 1223,\n            \"description\": \"FUND TRANSFER\",\n            \"trxDate\": \"2019-10-11\",\n            \"trxTime\": \"11:11:11\",\n            \"customerId\": \"222\",\n            \"version\": 0\n        },\n        {\n            \"id\": 4,\n            \"accountNumber\": \"8872838283\",\n            \"trxAmount\": 1233,\n            \"description\": \"3rd Party FUND TRANSFER\",\n            \"trxDate\": \"2019-11-11\",\n            \"trxTime\": \"11:11:11\",\n            \"customerId\": \"222\",\n            \"version\": 0\n        },\n        {\n            \"id\": 5,\n            \"accountNumber\": \"8872838283\",\n            \"trxAmount\": 1243,\n            \"description\": \"3rd Party FUND TRANSFER\",\n            \"trxDate\": \"2019-08-11\",\n            \"trxTime\": \"11:11:11\",\n            \"customerId\": \"222\",\n            \"version\": 0\n        }\n    ],\n    \"page\": {\n        \"size\": 5,\n        \"number\": 0,\n        \"totalElements\": 29,\n        \"totalPages\": 6\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Transaction by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/transactions/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"transactions",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Transaction by ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/transactions/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transactions",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "ETag",
+							"value": "\"0\""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 17 Aug 2025 01:56:27 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"accountNumber\": \"8872838283\",\n    \"trxAmount\": 123,\n    \"description\": \"FUND TRANSFER\",\n    \"trxDate\": \"2019-09-12\",\n    \"trxTime\": \"11:11:11\",\n    \"customerId\": \"222\",\n    \"version\": 0\n}"
+				},
+				{
+					"name": "Get Transaction by ID (After update description)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/transactions/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transactions",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "ETag",
+							"value": "\"1\""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 17 Aug 2025 01:56:37 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"accountNumber\": \"8872838283\",\n    \"trxAmount\": 123,\n    \"description\": \"UPDATED DESCRIPTION\",\n    \"trxDate\": \"2019-09-12\",\n    \"trxTime\": \"11:11:11\",\n    \"customerId\": \"222\",\n    \"version\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Transaction Description",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "If-Match",
+						"value": "0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"description\": \"UPDATED DESCRIPTION\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/transactions/1/description",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"transactions",
+						"1",
+						"description"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update Transaction Description",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "If-Match",
+								"value": "0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"UPDATED DESCRIPTION\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/transactions/1/description",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transactions",
+								"1",
+								"description"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "ETag",
+							"value": "\"1\""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 17 Aug 2025 01:56:32 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"accountNumber\": \"8872838283\",\n    \"trxAmount\": 123,\n    \"description\": \"UPDATED DESCRIPTION\",\n    \"trxDate\": \"2019-09-12\",\n    \"trxTime\": \"11:11:11\",\n    \"customerId\": \"222\",\n    \"version\": 1\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080/api"
+		}
+	]
+}
