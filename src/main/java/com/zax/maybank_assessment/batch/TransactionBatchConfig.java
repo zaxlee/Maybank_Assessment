@@ -35,10 +35,10 @@ public class TransactionBatchConfig {
     FlatFileItemReader<String[]> txnReader() {
         return new FlatFileItemReaderBuilder<String[]>()
                 .name("txnReader")
-                .resource(new ClassPathResource("data/transactions.txt")) // ← hardcoded for stability
+                .resource(new ClassPathResource("data/transactions.txt"))
                 .encoding("UTF-8")
-                .strict(true)           // fail fast if file missing
-                .linesToSkip(1)         // header present
+                .strict(true)
+                .linesToSkip(1)
                 .delimited().delimiter("|")
                 .names("ACCOUNT_NUMBER","TRX_AMOUNT","DESCRIPTION","TRX_DATE","TRX_TIME","CUSTOMER_ID")
                 .fieldSetMapper(fs -> new String[]{
